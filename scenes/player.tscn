@@ -1,46 +1,25 @@
 [gd_scene format=3 uid="uid://drl1qk6fwlh3v"]
 
 [ext_resource type="Script" uid="uid://dhi6fdkigngcp" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://4ov2wnynp87o" path="res://assets/sprites/knight.png" id="1_lj8jo"]
+[ext_resource type="Texture2D" uid="uid://bb6mgrv16n2wg" path="res://assets/sprites/character experiment sprite.png" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nckey"]
-radius = 8.0
-height = 26.0
+radius = 23.0
+height = 66.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_g2brh"]
-atlas = ExtResource("1_lj8jo")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dn4c7"]
-atlas = ExtResource("1_lj8jo")
-region = Rect2(32, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4vejd"]
-atlas = ExtResource("1_lj8jo")
-region = Rect2(64, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ws0vm"]
-atlas = ExtResource("1_lj8jo")
-region = Rect2(96, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_lj8jo"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_dqkch"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_g2brh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dn4c7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4vejd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ws0vm")
+"texture": SubResource("AtlasTexture_qhqgy")
 }],
 "loop": true,
-"name": &"idle",
-"speed": 10.0
+"name": &"default",
+"speed": 5.0
 }]
 
 [node name="player" type="CharacterBody2D" unique_id=254468400]
@@ -51,8 +30,5 @@ position = Vector2(-1, -10)
 shape = SubResource("CapsuleShape2D_nckey")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=474513067]
-position = Vector2(0, -12)
-sprite_frames = SubResource("SpriteFrames_lj8jo")
-animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.52444506
+position = Vector2(-1, -10)
+sprite_frames = SubResource("SpriteFrames_dqkch")
