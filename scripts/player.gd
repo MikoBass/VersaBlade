@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 300.0 #pixels per second
 const JUMP_VELOCITY = -400.0 # negative number means go up
-
+const DECEL = 20; # set decelaration speed
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta # apply gravity function to all move vectors per frame
@@ -14,12 +14,14 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY # sets y vector to the jump velocity
 		#double jump requires a jump counter to interact with this and to zero it after touching the floor
 		# havent added a floor so not just yet
-	if Input.is_action_pressed("mov_left"):
+	if Input.is_action_pressed("mov_left") and not Input.is_action_pressed("mov_right"):
 		velocity.x = move_toward(velocity.x, -SPEED, 15)
-	if Input.is_action_pressed("mov_right"):
+	elif Input.is_action_pressed("mov_right") and not Input.is_action_pressed("mov_left"):
 		velocity.x = move_toward(velocity.x, SPEED, 15)
-	if (Input.is_action_pressed("mov_right") and Input.is_action_pressed("mov_left")) or (( not Input.is_action_pressed("mov_right") and not Input.is_action_pressed("mov_left"))):
-		velocity.x = move_toward(velocity.x, 0, 30)
+	else:
+		
+		velocity.x = move_toward(velocity.x, 0, DECEL) 
+	#if (Input.is_action_pressed("mov_right") and Input.is_action_pressed("mov_left")) or (( not Input.is_action_pressed("mov_right") and not Input.is_action_pressed("mov_left"))):s
 		# my movement system sure does work
 		# cant wait till that one bug appears that fucks with direction god i hope it wont
 """func _physics_process(delta: float) -> void:
