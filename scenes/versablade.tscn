@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bq2ugrfcmq160"]
 
 [ext_resource type="Texture2D" uid="uid://bf1120a8re25j" path="res://assets/sprites/coin.png" id="1_182ho"]
+[ext_resource type="Script" uid="uid://dx5a4nmq0inov" path="res://scenes/versablade.gd" id="1_rfush"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ffocg"]
 
@@ -20,6 +21,7 @@ animations = [{
 }]
 
 [node name="versablade" type="Node2D" unique_id=536361877]
+script = ExtResource("1_rfush")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1900785207]
 

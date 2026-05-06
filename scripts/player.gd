@@ -10,8 +10,10 @@ var jumpCounter = 0;
 func throw():
 	var versaBlade = versaBladeScene.instantiate()
 	add_child(versaBlade) # adds the thing to scene
-	versaBlade.global_position = position # sets things position to players on spawn
+	versaBlade.position = $Marker2D.global_position # sets things position to players on spawn
 	versaBlade.set_as_top_level(true) # lets the spawned thing not follow the player
+	print("ass",versaBlade.global_position)
+	print("tits",global_position)
 # add a thing that makes the blade move
 
 func _physics_process(delta: float) -> void:
@@ -23,7 +25,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("mov_jump") and jumpCounter < 2:# and is_on_floor(): # checks if space pressed and on floor
 		velocity.y = JUMP_VELOCITY # sets y vector to the jump velocity
 		jumpCounter += 1 # counts jumps until its 2 so the double jump is the max
-		throw()
 		#double jump requires a jump counter to interact with this and to zero it after touching the floor
 		# havent added a floor so not just yet
 	if Input.is_action_pressed("mov_left") and not Input.is_action_pressed("mov_right"):
@@ -32,6 +33,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, SPEED, 15)
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECEL) 
+		
+	if Input.is_action_just_pressed("act_throw"):
+		throw()
+		
 	move_and_slide() # applies all _physics_process program to player this goes at the end
 	#if (Input.is_action_pressed("mov_right") and Input.is_action_pressed("mov_left")) or (( not Input.is_action_pressed("mov_right") and not Input.is_action_pressed("mov_left"))):s
 		# my movement system sure does work
