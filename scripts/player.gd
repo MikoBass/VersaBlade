@@ -20,6 +20,9 @@ func bladeThrow():
 	versaBlade.set_as_top_level(true) # lets the spawned thing not follow the player
 	versaBlade.bladeDirection = 1
 	bladeOut = true
+	#versaBlade.position.x = move_toward(versaBlade.position.x, versaBlade.position.x+100, throwSpeed)
+	#print(versaBlade.position.x+100)
+	#print(versaBlade.position.x)
 
 func bladeReturn()->void:
 	if is_instance_valid(activeBlade):
@@ -51,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			bladeOut = false
 		if bladeOut == false:
 			bladeThrow()
-		else:
+		elif bladeOut == true and activeBlade.bladeReturning == false:
 			bladeReturn()
 		
 	move_and_slide() # applies all _physics_process program to player this goes at the end
