@@ -1,20 +1,30 @@
 extends CharacterBody2D
 @onready var versaBladeScene = load("res://scenes/versablade.tscn")
+@onready var activeBlade = null
 
 const SPEED = 300.0 #pixels per second
 const JUMP_VELOCITY = -400.0 # negative number means go up
 const DECEL = 20; # set decelaration speed
 const THROW_SPEED = 200
 var jumpCounter = 0;
+var bladeOut = false
+const throwSpeed = 6
+var playerDirection = -1
 
-func throw():
+
+func bladeThrow():
 	var versaBlade = versaBladeScene.instantiate()
+	activeBlade = versaBlade
 	add_child(versaBlade) # adds the thing to scene
-	versaBlade.position = $Marker2D.global_position # sets things position to players on spawn
+	versaBlade.position = $Marker2D.global_position+Vector2(20,-10) # sets things position to players on spawn
 	versaBlade.set_as_top_level(true) # lets the spawned thing not follow the player
-	print("ass",versaBlade.global_position)
-	print("tits",global_position)
-# add a thing that makes the blade move
+	versaBlade.bladeDirection = 1
+	bladeOut = true
+
+func bladeReturn()->void:
+	if is_instance_valid(activeBlade):
+		activeBlade.bladeDirection *= -1
+		activeBlade.bladeReturning = true
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
@@ -28,14 +38,21 @@ func _physics_process(delta: float) -> void:
 		#double jump requires a jump counter to interact with this and to zero it after touching the floor
 		# havent added a floor so not just yet
 	if Input.is_action_pressed("mov_left") and not Input.is_action_pressed("mov_right"):
-		velocity.x = move_toward(velocity.x, -SPEED, 15)
+		playerDirection = -1
+		velocity.x = move_toward(velocity.x, SPEED*playerDirection, 20)
 	elif Input.is_action_pressed("mov_right") and not Input.is_action_pressed("mov_left"):
-		velocity.x = move_toward(velocity.x, SPEED, 15)
+		playerDirection = 1
+		velocity.x = move_toward(velocity.x, SPEED*playerDirection, 20)
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECEL) 
 		
 	if Input.is_action_just_pressed("act_throw"):
-		throw()
+		if not is_instance_valid(activeBlade):
+			bladeOut = false
+		if bladeOut == false:
+			bladeThrow()
+		else:
+			bladeReturn()
 		
 	move_and_slide() # applies all _physics_process program to player this goes at the end
 	#if (Input.is_action_pressed("mov_right") and Input.is_action_pressed("mov_left")) or (( not Input.is_action_pressed("mov_right") and not Input.is_action_pressed("mov_left"))):s
