@@ -1,5 +1,7 @@
 extends Node2D
-var direction = 1
+var playerScene = load("res://scenes/player.tscn")
+var player = playerScene.instantiate()
+var playerPos = player.position
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -8,4 +10,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	playerPos = player.global_position

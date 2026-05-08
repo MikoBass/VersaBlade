@@ -28,7 +28,8 @@ func bladeReturn()->void:
 	if is_instance_valid(activeBlade):
 		activeBlade.bladeDirection *= -1
 		activeBlade.bladeReturning = true
-
+func _process(delta: float) -> void:
+	position = global_position
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		jumpCounter = 0;
