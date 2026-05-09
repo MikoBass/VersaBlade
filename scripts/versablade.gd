@@ -7,22 +7,22 @@ var bladeReturning = false
 var bladeTime = 0
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	print(body.position)# progress i have a real position in this script now to just figure out how to get it out of this function
 	if body.name=="player" and bladeReturning:
 		queue_free()
 		
-
+		
 func _ready() -> void:
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(Global.playerPos)
 	#position.x = move_toward(position.x, (position.x+20)*bladeDirection, 10)
 	if bladeTime < 40 and bladeReturning == false:
 		position.x += throwSpeed * bladeDirection
 		bladeTime += 1
-		print(bladeTime)
+		#print(bladeTime)
 	elif bladeReturning == true:
 		position.x = move_toward(position.x, (Global.player.global_position.x-10), 10)# find a way to make it move towards the live player
 		position.y = move_toward(position.y, (Global.player.position.y+10), 10)

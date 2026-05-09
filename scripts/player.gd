@@ -21,9 +21,9 @@ func bladeThrow():
 	versaBlade.bladeDirection = 1
 	bladeOut = true
 	#versaBlade.position.x = move_toward(versaBlade.position.x, versaBlade.position.x+100, throwSpeed)
-	#print(versaBlade.position.x+100)
-	#print(versaBlade.position.x)
 
+func playerPos():
+	return position
 func bladeReturn()->void:
 	if is_instance_valid(activeBlade):
 		activeBlade.bladeDirection *= -1
