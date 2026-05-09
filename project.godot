@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*uid://b3jq5gcroos7f"
+Game="*uid://dlod4fkhr1qwr"
 
 [input]
 

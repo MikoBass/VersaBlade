@@ -2,6 +2,7 @@ extends CharacterBody2D
 @onready var versaBladeScene = load("res://scenes/versablade.tscn")
 @onready var activeBlade = null
 
+
 const SPEED = 300.0 #pixels per second
 const JUMP_VELOCITY = -400.0 # negative number means go up
 const DECEL = 20; # set decelaration speed
@@ -29,7 +30,7 @@ func bladeReturn()->void:
 		activeBlade.bladeDirection *= -1
 		activeBlade.bladeReturning = true
 func _process(delta: float) -> void:
-	position = global_position
+	Game.playerPos = position
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
 		jumpCounter = 0;
