@@ -10,7 +10,6 @@ const THROW_SPEED = 200
 var jumpCounter = 0;
 var bladeOut = false
 const throwSpeed = 6
-var playerDirection = -1
 
 
 func bladeThrow():
@@ -19,7 +18,6 @@ func bladeThrow():
 	add_child(versaBlade) # adds the thing to scene
 	versaBlade.position = $Marker2D.global_position+Vector2(20,-10) # sets things position to players on spawn
 	versaBlade.set_as_top_level(true) # lets the spawned thing not follow the player
-	versaBlade.bladeDirection = 1
 	bladeOut = true
 	#versaBlade.position.x = move_toward(versaBlade.position.x, versaBlade.position.x+100, throwSpeed)
 
@@ -27,7 +25,6 @@ func playerPos():
 	return position
 func bladeReturn()->void:
 	if is_instance_valid(activeBlade):
-		activeBlade.bladeDirection *= -1
 		activeBlade.bladeReturning = true
 func _process(delta: float) -> void:
 	Game.playerPos = position
@@ -43,11 +40,13 @@ func _physics_process(delta: float) -> void:
 		#double jump requires a jump counter to interact with this and to zero it after touching the floor
 		# havent added a floor so not just yet
 	if Input.is_action_pressed("mov_left") and not Input.is_action_pressed("mov_right"):
-		playerDirection = -1
-		velocity.x = move_toward(velocity.x, SPEED*playerDirection, 20)
+		$AnimatedSprite2D.flip_h = true
+		Game.playerDirection = -1
+		velocity.x = move_toward(velocity.x, SPEED*Game.playerDirection, 20)
 	elif Input.is_action_pressed("mov_right") and not Input.is_action_pressed("mov_left"):
-		playerDirection = 1
-		velocity.x = move_toward(velocity.x, SPEED*playerDirection, 20)
+		$AnimatedSprite2D.flip_h = false
+		Game.playerDirection = 1
+		velocity.x = move_toward(velocity.x, SPEED*Game.playerDirection, 20)
 	else:
 		velocity.x = move_toward(velocity.x, 0, DECEL) 
 		
