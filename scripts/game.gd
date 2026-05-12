@@ -1,7 +1,7 @@
 extends Node2D
 var playerPos:Vector2
 var playerDirection = 1
-
+var bladeColliderOff:bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

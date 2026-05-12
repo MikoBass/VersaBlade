@@ -2,7 +2,6 @@ extends CharacterBody2D
 @onready var versaBladeScene = load("res://scenes/versablade.tscn")
 @onready var activeBlade = null
 
-
 const SPEED = 300.0 #pixels per second
 const JUMP_VELOCITY = -400.0 # negative number means go up
 const DECEL = 20; # set decelaration speed
@@ -37,8 +36,6 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("mov_jump") and jumpCounter < 2:# and is_on_floor(): # checks if space pressed and on floor
 		velocity.y = JUMP_VELOCITY # sets y vector to the jump velocity
 		jumpCounter += 1 # counts jumps until its 2 so the double jump is the max
-		#double jump requires a jump counter to interact with this and to zero it after touching the floor
-		# havent added a floor so not just yet
 	if Input.is_action_pressed("mov_left") and not Input.is_action_pressed("mov_right"):
 		$AnimatedSprite2D.flip_h = true
 		Game.playerDirection = -1

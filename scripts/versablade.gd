@@ -1,14 +1,14 @@
 extends Node2D
 @onready var playerScene = load("res://scenes/player.tscn")
-#@onready 
 const throwSpeed = 5
 var bladeReturning = false
 var bladeTime = 0
+var bladeRmPrimer = 0
+
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	print(body.position)# progress i have a real position in this script now to just figure out how to get it out of this function
-	if body.name=="player" and bladeReturning:
-		queue_free()
+	if body.name == "player" and bladeReturning:
+			queue_free()
 	
 		
 		
@@ -18,14 +18,16 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(Game.playerPos)
-	#position.x = move_toward(position.x, (position.x+20)*bladeDirection, 10)
+	print(bladeReturning)
 	if bladeTime < 40 and bladeReturning == false:
 		position.x += throwSpeed * Game.playerDirection
 		bladeTime += 1
-		#print(bladeTime)
 	elif bladeReturning == true:
-		position.x = move_toward(position.x, (Game.playerPos.x), 10)# find a way to make it move towards the live player
+		$CollisionShape2D.disabled = true
+		position.x = move_toward(position.x, (Game.playerPos.x), 10)
 		position.y = move_toward(position.y, (Game.playerPos.y), 10)
-		#position.x += throwSpeed * bladeDirection
+		if (position.x == Game.playerPos.x and position.y == Game.playerPos.y):
+			queue_free()
+	if bladeTime >= 40:
+		$CollisionShape2D.disabled = false
 	
