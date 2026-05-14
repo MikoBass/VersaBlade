@@ -22,7 +22,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfush"]
-size = Vector2(20, 4)
+size = Vector2(42, 4)
 
 [node name="versablade" type="CharacterBody2D" unique_id=1764676863]
 script = ExtResource("1_rfush")

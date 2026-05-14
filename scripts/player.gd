@@ -9,9 +9,11 @@ const THROW_SPEED = 200
 var jumpCounter = 0;
 var bladeOut = false
 const throwSpeed = 6
+var bladeDirection
 
 
 func bladeThrow():
+	Game.bladeDirection = Game.playerDirection
 	var versaBlade = versaBladeScene.instantiate()
 	activeBlade = versaBlade
 	add_child(versaBlade) # adds the thing to scene

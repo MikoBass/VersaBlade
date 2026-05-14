@@ -20,7 +20,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	print(bladeReturning)
 	if bladeTime < 40 and bladeReturning == false:
-		position.x += throwSpeed * Game.playerDirection
+		position.x += throwSpeed * Game.bladeDirection
 		bladeTime += 1
 	elif bladeReturning == true:
 		$CollisionShape2D.disabled = true
